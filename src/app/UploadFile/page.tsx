@@ -6,7 +6,8 @@ import mammoth from 'mammoth';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 
 // Set the workerSrc to the correct path, hardcoding the version number
-GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js`;
+//GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js`;
+GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.min.js";
 
 
 export default function UploadFile() {

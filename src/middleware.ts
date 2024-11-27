@@ -5,16 +5,16 @@ import { getToken } from 'next-auth/jwt'; // For checking token (authentication)
 const secret = process.env.NEXTAUTH_SECRET; // This secret is needed to verify the token
 
 export async function middleware(req: NextRequest) {
-  const pathname = req.nextUrl.pathname;
+  const { pathname } = req.nextUrl;
 
-  if(pathname === '/'){
-    const url = req.nextUrl.clone();
-    url.pathname = '/SignIn'; 
-    return NextResponse.redirect(url);
-  }
   // Get the session token (JWT) to determine if the user is authenticated
   const token = await getToken({ req, secret });
 
+  if(pathname === '/'){
+    const url = req.nextUrl.clone();
+    url.pathname = token ? "/UploadFile" : "/SignIn";
+    return NextResponse.redirect(url);
+  }
   // If the user is authenticated and trying to access the sign-in page, redirect to /UploadFile
   if (token && pathname === '/SignIn') {
     const url = req.nextUrl.clone();
